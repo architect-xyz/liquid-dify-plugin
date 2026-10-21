@@ -20,6 +20,10 @@ To use another model, choose **Add Model** and enter its name exactly as `GET /v
 
 The exchange sets a cap on each request. It sends the cap in the `x-liquid-cap-usd` response header. To limit total spend, set a spending limit on the key.
 
+## Payments
+
+The plugin makes no payments and moves no funds. It sends chat requests only. Liquid Inference bills your Liquid workspace balance, which you manage on the Liquid Inference site.
+
 ## Source
 
 https://github.com/architect-xyz/liquid-dify-plugin
