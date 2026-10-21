@@ -1,0 +1,120 @@
+provider: liquid
+label:
+  en_US: Liquid Inference
+description:
+  en_US: Models from competing providers, ranked by price for each request.
+icon_small:
+  en_US: icon.svg
+icon_small_dark:
+  en_US: icon-dark.svg
+icon_large:
+  en_US: icon.svg
+icon_large_dark:
+  en_US: icon-dark.svg
+background: "#F1EFED"
+help:
+  title:
+    en_US: Get your API key from Liquid Inference
+  url:
+    en_US: https://app.inference.ai.exchange
+supported_model_types:
+  - llm
+configurate_methods:
+  - predefined-model
+  - customizable-model
+extra:
+  python:
+    provider_source: provider/liquid.py
+    model_sources:
+      - models/llm/llm.py
+provider_credential_schema:
+  credential_form_schemas:
+    - variable: api_key
+      label:
+        en_US: API Key
+      type: secret-input
+      required: true
+      placeholder:
+        en_US: Enter your spend key
+    - variable: endpoint_url
+      label:
+        en_US: API Base URL
+      type: text-input
+      required: false
+      placeholder:
+        en_US: https://router.inference.ai.exchange/v1
+model_credential_schema:
+  model:
+    label:
+      en_US: Model Name
+    placeholder:
+      en_US: Enter a model name from GET /v1/models
+  credential_form_schemas:
+    - variable: api_key
+      label:
+        en_US: API Key
+      type: secret-input
+      required: true
+      placeholder:
+        en_US: Enter your spend key
+    - variable: endpoint_url
+      label:
+        en_US: API Base URL
+      type: text-input
+      required: false
+      placeholder:
+        en_US: https://router.inference.ai.exchange/v1
+    - variable: context_size
+      label:
+        en_US: Model context size
+      type: text-input
+      required: true
+      default: "4096"
+      placeholder:
+        en_US: Enter the context size
+    - variable: max_tokens_to_sample
+      label:
+        en_US: Upper bound for max tokens
+      type: text-input
+      required: false
+      default: "4096"
+      show_on:
+        - variable: __model_type
+          value: llm
+    - variable: vision_support
+      label:
+        en_US: Vision support
+      type: radio
+      required: false
+      default: no_support
+      options:
+        - value: support
+          label:
+            en_US: "Yes"
+        - value: no_support
+          label:
+            en_US: "No"
+      show_on:
+        - variable: __model_type
+          value: llm
+    - variable: function_calling_type
+      label:
+        en_US: Function calling
+      type: select
+      required: false
+      default: no_call
+      options:
+        - value: no_call
+          label:
+            en_US: Not supported
+        - value: tool_call
+          label:
+            en_US: Supported
+      show_on:
+        - variable: __model_type
+          value: llm
+models:
+  llm:
+    position: models/llm/_position.yaml
+    predefined:
+      - models/llm/*.yaml
